@@ -35,6 +35,7 @@ co(function*() {
 
     pem.createCertificate({days:1, selfSigned:true}, function(err, keys){
       const httpsServer = https.createServer({key: keys.serviceKey, cert: keys.certificate}, app.callback());
+      app.io.attach(httpsServer);
       httpsServer.listen(httpsPort, '0.0.0.0');
     })
 
